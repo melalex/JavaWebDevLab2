@@ -1,4 +1,4 @@
-package com.room414.textanalyzer.application.document.word;
+package com.room414.textanalyzer.application.document.element.word;
 
 /**
  * @author Alexander Melashchenko
@@ -31,7 +31,8 @@ public class Word {
         isFeet = true;
     }
 
-    public String getString() {
+    @Override
+    public String toString() {
         return string;
     }
 }

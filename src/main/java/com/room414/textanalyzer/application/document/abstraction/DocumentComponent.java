@@ -11,9 +11,7 @@ import java.util.function.Consumer;
 public abstract class DocumentComponent {
     protected List<DocumentComponent> components = new LinkedList<>();
 
-    public abstract void add(String component);
-
-    protected void addComponent(DocumentComponent component) {
+    public void addComponent(DocumentComponent component) {
         components.add(component);
     }
 

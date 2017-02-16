@@ -7,8 +7,5 @@ import com.room414.textanalyzer.application.document.abstraction.DocumentCompone
  * @version 1.0 16 Feb 2017
  */
 public class Document extends DocumentComponent {
-    @Override
-    public void add(String component) {
 
-    }
 }

@@ -1,7 +1,7 @@
 package com.room414.textanalyzer.application.counters.wordcounter;
 
 import com.room414.textanalyzer.application.document.sentance.Sentence;
-import com.room414.textanalyzer.application.document.word.Word;
+import com.room414.textanalyzer.application.document.element.word.Word;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,8 +49,7 @@ public class WordCounter {
         MutableInt count = map.get(word);
         if (count == null) {
             map.put(word, new MutableInt());
-        }
-        else {
+        } else {
             count.increment();
         }
     }
