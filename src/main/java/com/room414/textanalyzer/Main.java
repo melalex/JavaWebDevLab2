@@ -3,6 +3,7 @@ package com.room414.textanalyzer;
 import com.room414.textanalyzer.application.Application;
 import com.room414.textanalyzer.application.counters.wordcounter.WordCounter;
 
+import java.io.FileNotFoundException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -17,10 +18,12 @@ public class Main {
             return;
         }
 
-        Application application = new Application();
-
-        List<WordCounter> result = application.analyse(args[0], Arrays.copyOfRange(args, 1, args.length - 1));
-
-        result.forEach(r -> System.out.println(r.toString()));
+        try {
+            Application application = new Application();
+            List<WordCounter> result = application.analyse(args[0], Arrays.copyOfRange(args, 1, args.length - 1));
+            result.forEach(r -> System.out.println(r.toString()));
+        } catch (FileNotFoundException e) {
+            System.out.print(e.getMessage());
+        }
     }
 }
