@@ -1,7 +1,7 @@
 package com.room414.textanalyzer.application.document.element.charelement;
 
-import com.room414.textanalyzer.application.document.abstraction.ComponentFactory;
-import com.room414.textanalyzer.application.document.abstraction.DocumentComponent;
+import com.room414.textanalyzer.application.document.element.ElementFactory;
+import com.room414.textanalyzer.application.visitor.interfaces.Element;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -10,7 +10,7 @@ import java.util.Map;
  * @author Alexander Melashchenko
  * @version 1.0 16 Feb 2017
  */
-public class CharElementFactory implements ComponentFactory {
+public class CharElementFactory implements ElementFactory {
     private static CharElementFactory ourInstance = new CharElementFactory();
 
     public static CharElementFactory getInstance() {
@@ -22,7 +22,7 @@ public class CharElementFactory implements ComponentFactory {
     }
 
     @Override
-    public DocumentComponent create(String string) {
+    public Element create(String string) {
         return pool.computeIfAbsent(string, CharElement::new);
     }
 

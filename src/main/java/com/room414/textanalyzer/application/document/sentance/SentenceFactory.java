@@ -1,10 +1,11 @@
 package com.room414.textanalyzer.application.document.sentance;
 
 import com.room414.textanalyzer.application.document.abstraction.ComponentFactory;
-import com.room414.textanalyzer.application.document.abstraction.DocumentComponent;
+import com.room414.textanalyzer.application.document.element.ElementFactory;
 import com.room414.textanalyzer.application.document.element.charelement.CharElementFactory;
 import com.room414.textanalyzer.application.document.element.whitespace.WhiteSpaceFactory;
 import com.room414.textanalyzer.application.document.element.word.WordFactory;
+import com.room414.textanalyzer.application.visitor.interfaces.Element;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -24,20 +25,22 @@ public class SentenceFactory implements ComponentFactory {
         return ourInstance;
     }
 
-    private ComponentFactory wordFactory = WordFactory.getInstance();
-    private ComponentFactory whiteSpaceFactory = WhiteSpaceFactory.getInstance();
-    private ComponentFactory charElementFactory = CharElementFactory.getInstance();
+    private ElementFactory wordFactory = WordFactory.getInstance();
+    private ElementFactory whiteSpaceFactory = WhiteSpaceFactory.getInstance();
+    private ElementFactory charElementFactory = CharElementFactory.getInstance();
+
+    private int sentenceCount = 0;
 
     private SentenceFactory() {
     }
 
     @Override
     public Sentence create(String sentence) {
-        Sentence sentenceObj = new Sentence();
+        Sentence sentenceObj = new Sentence(++sentenceCount);
         Matcher splitMatcher = SPLIT_PATTERN.matcher(sentence);
         Matcher wordMatcher;
         Matcher whiteSpaceMatcher;
-        DocumentComponent component;
+        Element element;
         String match;
 
         while (splitMatcher.find()) {
@@ -47,14 +50,14 @@ public class SentenceFactory implements ComponentFactory {
                 whiteSpaceMatcher = WHITE_SPACE_PATTERN.matcher(match);
 
                 if (wordMatcher.matches()) {
-                    component = wordFactory.create(match);
+                    element = wordFactory.create(match);
                 } else if(whiteSpaceMatcher.matches()) {
-                    component = whiteSpaceFactory.create(match);
+                    element = whiteSpaceFactory.create(match);
                 } else {
-                    component = charElementFactory.create(match);
+                    element = charElementFactory.create(match);
                 }
 
-                sentenceObj.addComponent(component);
+                sentenceObj.addElement(element);
             }
         }
 

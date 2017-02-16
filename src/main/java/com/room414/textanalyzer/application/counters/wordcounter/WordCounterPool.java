@@ -23,7 +23,7 @@ public class WordCounterPool {
     private WordCounterPool() {
     }
 
-    public WordCounter getWordCounter(Sentence sentence, int sentenceNumber) {
+    public WordCounter getWordCounter(Sentence sentence) {
         if (wordsToCount == null) {
             throw new IllegalStateException("No word to count");
         }
@@ -34,7 +34,6 @@ public class WordCounterPool {
             wordCounter = new WordCounter(wordsToCount);
         } else {
             wordCounter.setSentence(sentence);
-            wordCounter.setSentenceNumber(sentenceNumber);
         }
 
         return wordCounter;

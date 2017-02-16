@@ -15,7 +15,6 @@ public class WordCounter {
     private Set<String> wordsToSearch;
     private Map<String, MutableInt> map = new HashMap<>();
     private Sentence sentence;
-    private int sentenceNumber;
 
     private static class MutableInt {
         private int value = 1;
@@ -39,10 +38,6 @@ public class WordCounter {
 
     void setSentence(Sentence sentence) {
         this.sentence = sentence;
-    }
-
-    void setSentenceNumber(int sentenceNumber) {
-        this.sentenceNumber = sentenceNumber;
     }
 
     private void incrementCount(String word) {
@@ -73,7 +68,7 @@ public class WordCounter {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%d: %s\n", sentenceNumber, sentence.toString()));
+        stringBuilder.append(String.format("%d: %s\n", sentence.getNumber(), sentence.toString()));
 
         map.forEach((k, v) -> stringBuilder.append(String.format("%s -> %d time(s)\n", k, v.get())));
 

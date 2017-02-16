@@ -23,8 +23,8 @@ public class CountVisitorFactory {
 
     }
 
-    Visitor create(Sentence sentence, int sentenceNumber) {
-        WordCounter wordCounter = wordCounterPool.getWordCounter(sentence, sentenceNumber);
+    public Visitor create(Sentence sentence) {
+        WordCounter wordCounter = wordCounterPool.getWordCounter(sentence);
         if (visitor == null) {
             visitor = new CountVisitor(wordCounter);
         } else {

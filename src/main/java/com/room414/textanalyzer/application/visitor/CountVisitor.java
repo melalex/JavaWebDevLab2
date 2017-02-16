@@ -20,7 +20,7 @@ public class CountVisitor implements Visitor {
         this.wordCounter = wordCounter;
     }
 
-    public void setWordCounter(WordCounter wordCounter) {
+    void setWordCounter(WordCounter wordCounter) {
         this.wordCounter = wordCounter;
     }
 
