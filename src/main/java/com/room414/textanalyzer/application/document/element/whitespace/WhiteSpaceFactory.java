@@ -14,11 +14,13 @@ public class WhiteSpaceFactory implements ComponentFactory {
         return ourInstance;
     }
 
+    private WhiteSpace space = new WhiteSpace(" ");
+
     private WhiteSpaceFactory() {
     }
 
     @Override
     public DocumentComponent create(String string) {
-        return null;
+        return space;
     }
 }
