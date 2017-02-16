@@ -7,12 +7,13 @@ import com.room414.textanalyzer.application.document.abstraction.DocumentCompone
  * @version 1.0 16 Feb 2017
  */
 public class Sentence extends DocumentComponent {
-    private String string;
-
-
     @Override
     public String toString() {
-        return string;
+        StringBuilder stringBuilder = new StringBuilder();
+
+        components.forEach(c -> stringBuilder.append(c.toString()));
+
+        return stringBuilder.toString();
     }
 
 }

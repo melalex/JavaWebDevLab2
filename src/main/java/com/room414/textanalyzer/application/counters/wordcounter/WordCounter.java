@@ -56,15 +56,15 @@ public class WordCounter {
 
     private void checkWord(Word word) {
         word.setAsVisited();
-        if (wordsToSearch.contains(word.getString())) {
+        if (wordsToSearch.contains(word.toString())) {
             word.setAsFeet();
-            incrementCount(word.getString());
+            incrementCount(word.toString());
         }
     }
 
     public void doCount(Word word) {
         if (word.isFeet()) {
-            incrementCount(word.getString());
+            incrementCount(word.toString());
         } else if (!word.isVisited()) {
             checkWord(word);
         }
@@ -73,7 +73,7 @@ public class WordCounter {
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%d: %s\n", sentenceNumber, sentence.getString()));
+        stringBuilder.append(String.format("%d: %s\n", sentenceNumber, sentence.toString()));
 
         map.forEach((k, v) -> stringBuilder.append(String.format("%s -> %d time(s)\n", k, v.get())));
 

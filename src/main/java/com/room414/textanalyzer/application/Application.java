@@ -27,7 +27,7 @@ public class Application {
             Document document = new Document();
             Sentence sentence;
             while (sentences.hasNext()) {
-                sentence = sentenceFactory.createSentence(sentences.next());
+                sentence = sentenceFactory.create(sentences.next());
                 document.addComponent(sentence);
             }
         } catch (FileNotFoundException e) {

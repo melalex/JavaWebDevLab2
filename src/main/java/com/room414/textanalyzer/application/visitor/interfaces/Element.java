@@ -1,4 +1,4 @@
-package com.room414.textanalyzer.application.document.abstraction;
+package com.room414.textanalyzer.application.visitor.interfaces;
 
 /**
  * @author Alexander Melashchenko
