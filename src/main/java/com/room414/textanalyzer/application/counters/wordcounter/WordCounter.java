@@ -3,9 +3,7 @@ package com.room414.textanalyzer.application.counters.wordcounter;
 import com.room414.textanalyzer.application.document.sentance.Sentence;
 import com.room414.textanalyzer.application.document.element.word.Word;
 
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -111,30 +109,30 @@ public class WordCounter {
                 .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().asInteger()));
     }
 
-    public Map<String, Integer> getSortedMap() {
-        return map
-                .entrySet()
-                .stream()
-                .sorted((e1, e2) -> {
-                    int result;
-                    if (e1.getValue().get() != e2.getValue().get()) {
-                        result = e1.getValue().get() - e2.getValue().get();
-                    } else {
-                        result = e1.getKey().compareTo(e2.getKey());
-                    }
-                    return result;
-                })
-                .collect(Collectors.toMap(Map.Entry::getKey, e -> e.getValue().asInteger()));
+    public List<Pair<String, Integer>> getSortedMap() {
+         return map
+                 .entrySet()
+                 .stream()
+                 .map(e -> new Pair<>(e.getKey(), e.getValue().asInteger()))
+                 .sorted(Comparator.reverseOrder())
+                 .collect(Collectors.toList());
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(String.format("%d: %s\n", sentence.getNumber(), sentence.toString()));
 
-        Map<String, Integer> sortedMap = getSortedMap();
+        if (sentence != null) {
+            stringBuilder.append(String.format("%d: %s\n", sentence.getNumber(), sentence.toString()));
+        }
 
-        sortedMap.forEach((k, v) -> stringBuilder.append(String.format("%s -> %d time(s)\n", k, v)));
+        List<Pair<String, Integer>> sortedMap = getSortedMap();
+
+        sortedMap.forEach(p -> stringBuilder.append(String.format(
+                "%s -> %d time(s)\n",
+                p.getFirstValue(),
+                p.getSecondValue()
+        )));
 
         return stringBuilder.toString();
     }

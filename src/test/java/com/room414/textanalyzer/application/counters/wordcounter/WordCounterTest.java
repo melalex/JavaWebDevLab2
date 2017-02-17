@@ -6,7 +6,6 @@ import com.room414.textanalyzer.application.document.sentance.Sentence;
 import com.room414.textanalyzer.application.document.sentance.SentenceFactory;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 
 import static org.junit.jupiter.api.Assertions.*;

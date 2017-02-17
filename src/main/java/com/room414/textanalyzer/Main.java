@@ -22,7 +22,7 @@ public class Main {
 
         try {
             Application application = new Application();
-            List<WordCounter> result = application.analyse(args[0], Arrays.copyOfRange(args, 1, args.length - 1));
+            List<WordCounter> result = application.analyse(args[0], Arrays.copyOfRange(args, 1, args.length));
             result.forEach(r -> System.out.println(r.toString()));
 
             Optional<WordCounter> globalResultStream = result
