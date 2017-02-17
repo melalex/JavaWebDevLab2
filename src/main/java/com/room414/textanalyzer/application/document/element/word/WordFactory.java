@@ -23,7 +23,7 @@ public class WordFactory implements ElementFactory {
     }
 
     @Override
-    public Element create(String string) {
+    public Word create(String string) {
         return pool.computeIfAbsent(string, Word::new);
     }
 }

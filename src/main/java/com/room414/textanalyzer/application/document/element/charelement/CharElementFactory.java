@@ -22,7 +22,7 @@ public class CharElementFactory implements ElementFactory {
     }
 
     @Override
-    public Element create(String string) {
+    public CharElement create(String string) {
         return pool.computeIfAbsent(string, CharElement::new);
     }
 

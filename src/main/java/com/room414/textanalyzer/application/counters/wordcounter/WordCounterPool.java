@@ -50,6 +50,10 @@ public class WordCounterPool {
     }
 
     public List<WordCounter> getPool() {
-        return (List<WordCounter>) pool.clone();
+        LinkedList<WordCounter> result = (LinkedList<WordCounter>) pool.clone();
+        if (result.getLast().isEmpty()) {
+            result.removeLast();
+        }
+        return result;
     }
 }

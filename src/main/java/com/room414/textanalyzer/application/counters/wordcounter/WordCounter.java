@@ -20,8 +20,20 @@ public class WordCounter {
     private static class MutableInt {
         private int value = 1;
 
+        MutableInt() {
+
+        }
+
+        MutableInt(int value) {
+            this.value = value;
+        }
+
         void increment() {
             ++value;
+        }
+
+        MutableInt sum(MutableInt other) {
+            return new MutableInt(this.value + other.value);
         }
 
         int get() {
@@ -68,6 +80,28 @@ public class WordCounter {
         } else if (!word.isVisited()) {
             checkWord(word);
         }
+    }
+
+    private static Map<String, MutableInt> mapSum(Map<String, MutableInt> map1, Map<String, MutableInt> map2) {
+        Map<String, MutableInt> result = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
+        result.putAll(map1);
+        for (String key : map2.keySet()) {
+            MutableInt value = result.get(key);
+            if (value != null) {
+                result.put(key, value.sum(map2.get(key)));
+            } else {
+                result.put(key, map2.get(key));
+            }
+        }
+        return result;
+    }
+
+
+
+    public WordCounter sum(WordCounter other) {
+        WordCounter result = new WordCounter(wordsToSearch);
+        result.map = mapSum(this.map, other.map);
+        return result;
     }
 
     public Map<String, Integer> getMap() {

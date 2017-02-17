@@ -20,7 +20,7 @@ public class WhiteSpaceFactory implements ElementFactory {
     }
 
     @Override
-    public Element create(String string) {
+    public WhiteSpace create(String string) {
         return space;
     }
 }
