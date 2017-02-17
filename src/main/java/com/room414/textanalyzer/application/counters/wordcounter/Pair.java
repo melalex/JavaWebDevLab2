@@ -11,9 +11,6 @@ public class Pair<T extends Comparable, T1 extends Comparable> implements Compar
     private T firstValue;
     private T1 secondValue;
 
-    public Pair() {
-    }
-
     public Pair(T firstValue, T1 secondValue) {
         this.firstValue = firstValue;
         this.secondValue = secondValue;
@@ -23,16 +20,8 @@ public class Pair<T extends Comparable, T1 extends Comparable> implements Compar
         return firstValue;
     }
 
-    public void setFirstValue(T firstValue) {
-        this.firstValue = firstValue;
-    }
-
     public T1 getSecondValue() {
         return secondValue;
-    }
-
-    public void setSecondValue(T1 secondValue) {
-        this.secondValue = secondValue;
     }
 
     @Override
@@ -64,8 +53,8 @@ public class Pair<T extends Comparable, T1 extends Comparable> implements Compar
 
     @Override
     public int compareTo(Pair<T, T1> tt1Pair) {
-        return this.secondValue.compareTo(tt1Pair.secondValue) == 0 ?
+        return this.secondValue.compareTo(tt1Pair.secondValue) != 0 ?
                 this.secondValue.compareTo(tt1Pair.secondValue) :
-                this.firstValue.compareTo(tt1Pair.firstValue);
+                tt1Pair.firstValue.compareTo(this.firstValue);
     }
 }

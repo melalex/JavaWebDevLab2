@@ -113,7 +113,7 @@ public class WordCounter {
          return map
                  .entrySet()
                  .stream()
-                 .map(e -> new Pair<>(e.getKey(), e.getValue().asInteger()))
+                 .map(e -> new Pair<>(e.getKey().toLowerCase(), e.getValue().asInteger()))
                  .sorted(Comparator.reverseOrder())
                  .collect(Collectors.toList());
     }
