@@ -5,6 +5,7 @@ import com.room414.textanalyzer.application.document.sentance.Sentence;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 
 /**
  * @author Alexander Melashchenko
@@ -21,6 +22,7 @@ public class WordCounterPool {
     }
 
     private WordCounterPool() {
+
     }
 
     public WordCounter getWordCounter(Sentence sentence) {
@@ -30,17 +32,21 @@ public class WordCounterPool {
 
         WordCounter wordCounter = pool.getLast();
 
-        if (!wordCounter.isEmpty()) {
-            wordCounter = new WordCounter(wordsToCount);
-        } else {
+        if (wordCounter.isEmpty()) {
             wordCounter.setSentence(sentence);
+        } else {
+            wordCounter = new WordCounter(wordsToCount);
+            wordCounter.setSentence(sentence);
+            pool.add(wordCounter);
         }
 
         return wordCounter;
     }
 
-    public void setWordsToCount(Set<String> wordsToCount) {
-        this.wordsToCount = wordsToCount;
+    public void setWordsToCount(List<String> wordsToCount) {
+        this.wordsToCount = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        this.wordsToCount.addAll(wordsToCount);
+        pool.add(new WordCounter(this.wordsToCount));
     }
 
     public List<WordCounter> getPool() {

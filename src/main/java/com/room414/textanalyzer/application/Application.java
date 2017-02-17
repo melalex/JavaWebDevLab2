@@ -22,7 +22,7 @@ public class Application {
     public List<WordCounter> analyse(String path, String[] wordsToCount) throws FileNotFoundException{
         WordCounterPool counterPool = WordCounterPool.getInstance();
         SentenceFactory sentenceFactory = SentenceFactory.getInstance();
-        counterPool.setWordsToCount(new HashSet<>(Arrays.asList(wordsToCount)));
+        counterPool.setWordsToCount(Arrays.asList(wordsToCount));
         try (Scanner sentences = new Scanner(new File(path)).useDelimiter("\\.")) {
             Document document = new Document();
             Sentence sentence;
@@ -30,6 +30,7 @@ public class Application {
                 sentence = sentenceFactory.create(sentences.next());
                 document.addComponent(sentence);
             }
+            document.countWords();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
             throw e;

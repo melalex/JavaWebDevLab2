@@ -3,8 +3,8 @@ package com.room414.textanalyzer.application.document.element.word;
 import com.room414.textanalyzer.application.document.element.ElementFactory;
 import com.room414.textanalyzer.application.visitor.interfaces.Element;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Alexander Melashchenko
@@ -17,7 +17,7 @@ public class WordFactory implements ElementFactory {
         return ourInstance;
     }
 
-    private Map<String, Word> pool = new HashMap<>();
+    private Map<String, Word> pool = new TreeMap<>(String.CASE_INSENSITIVE_ORDER);
 
     private WordFactory() {
     }

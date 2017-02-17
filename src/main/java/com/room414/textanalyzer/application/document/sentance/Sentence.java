@@ -14,7 +14,6 @@ import java.util.List;
  */
 public class Sentence extends DocumentComponent {
     private List<Element> elements = new LinkedList<>();
-    private Visitor visitor = CountVisitorFactory.getInstance().create(this);
     private int number;
 
     Sentence(int number) {
@@ -27,6 +26,7 @@ public class Sentence extends DocumentComponent {
 
     @Override
     public void countWords() {
+        Visitor visitor = CountVisitorFactory.getInstance().create(this);
         elements.forEach(e -> e.accept(visitor));
     }
 

@@ -44,21 +44,19 @@ public class SentenceFactory implements ComponentFactory {
         String match;
 
         while (splitMatcher.find()) {
-            for (int i = 1; i <= splitMatcher.groupCount(); i++) {
-                match = splitMatcher.group(i);
-                wordMatcher = WORD_PATTERN.matcher(match);
-                whiteSpaceMatcher = WHITE_SPACE_PATTERN.matcher(match);
+            match = splitMatcher.group(0);
+            wordMatcher = WORD_PATTERN.matcher(match);
+            whiteSpaceMatcher = WHITE_SPACE_PATTERN.matcher(match);
 
-                if (wordMatcher.matches()) {
-                    element = wordFactory.create(match);
-                } else if(whiteSpaceMatcher.matches()) {
-                    element = whiteSpaceFactory.create(match);
-                } else {
-                    element = charElementFactory.create(match);
-                }
-
-                sentenceObj.addElement(element);
+            if (wordMatcher.matches()) {
+                element = wordFactory.create(match);
+            } else if(whiteSpaceMatcher.matches()) {
+                element = whiteSpaceFactory.create(match);
+            } else {
+                element = charElementFactory.create(match);
             }
+
+            sentenceObj.addElement(element);
         }
 
         return sentenceObj;
