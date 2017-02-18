@@ -14,7 +14,7 @@ import java.util.TreeSet;
 public class WordCounterPool {
     private static WordCounterPool ourInstance = new WordCounterPool();
 
-    private Set<String> wordsToCount = null;
+    private Set<String> wordsToCount = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);;
     private LinkedList<WordCounter> pool = new LinkedList<>();
 
     public static WordCounterPool getInstance() {
@@ -22,14 +22,10 @@ public class WordCounterPool {
     }
 
     private WordCounterPool() {
-
+        pool.add(new WordCounter(this.wordsToCount));
     }
 
     public WordCounter getWordCounter(Sentence sentence) {
-        if (wordsToCount == null) {
-            throw new IllegalStateException("No word to count");
-        }
-
         WordCounter wordCounter = pool.getLast();
 
         if (wordCounter.isEmpty()) {
@@ -44,9 +40,16 @@ public class WordCounterPool {
     }
 
     public void setWordsToCount(List<String> wordsToCount) {
-        this.wordsToCount = new TreeSet<>(String.CASE_INSENSITIVE_ORDER);
+        if (wordsToCount == null) {
+            throw new IllegalArgumentException("wordsToCount can't be null");
+        }
+
+        if (wordsToCount.contains(null)) {
+            throw new IllegalArgumentException("wordsToCount can't contain null");
+        }
+
+        this.wordsToCount.clear();
         this.wordsToCount.addAll(wordsToCount);
-        pool.add(new WordCounter(this.wordsToCount));
     }
 
     public List<WordCounter> getPool() {
